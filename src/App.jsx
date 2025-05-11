@@ -1,14 +1,33 @@
 import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
 import './App.css'
-import Producto from '/src/assets/components/Producto.jsx'
+import { Modificar } from './assets/components/Modificar.jsx'
+import { MostrarP } from './assets/components/comp_funcionales/MostrarP.jsx'
+import { Agregar } from './assets/components/Agregar.jsx'
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [Position, setPosition] = useState('Agregar')
+  const [productos, setproductos] = useState([])
+  const [buscado, setbuscado] = useState([])
   return (
     <>
-    <Producto> </Producto>
+      <h1>MENU PRINCIPAL</h1>
+      <div >
+        <button onClick={() => setPosition('Agregar')}  >
+          Agregar
+        </button>
+        /
+        <button onClick={() => setPosition('Buscar')}  >
+          Buscar
+        </button>
+      </div>
+      {Position === 'Agregar' ? (
+        <Agregar></Agregar>
+      ) : (
+        <Buscar></Buscar>
+      )
+      }
     </>
   )
 }
-
 export default App

@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import React from 'react'
 import { Modificar } from "./Modificar";
 import { Buscar } from "./Buscar";
+import Eliminar from "./Eliminar";
+import '../css/agregar.css'
 export const Agregar = () => {
     const [productos, setProductos] = useState ([])
     const [formulario, setFormulario] = useState ({
@@ -15,6 +17,9 @@ export const Agregar = () => {
         estado: "",
         modificado:true,
     })
+    const eliminarProducto = (id) => {
+        setProductos(productos.filter(producto => producto.id !== id));
+    };
     const handleChange = (e) => {
         const { name, value } = e.target
         setFormulario({ ...formulario, [name]: value})
@@ -77,7 +82,7 @@ export const Agregar = () => {
         <ul>
             {productos.map ((prod) =>(
                 <li key={prod.id}>
-                    <button>Eliminar</button>
+                    <Eliminar id={prod.id} eliminarProducto={eliminarProducto} />
                     <button onClick={() => {setProductos(productos.map(a =>
                     a.id === prod.id ? { ...a, modificado: !a.modificado } : a
                     ));} }>Modificar</button>

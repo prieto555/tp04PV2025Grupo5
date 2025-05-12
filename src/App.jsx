@@ -5,6 +5,8 @@ import './App.css'
 import { Modificar } from './assets/components/Modificar.jsx'
 import { MostrarP } from './assets/components/comp_funcionales/MostrarP.jsx'
 import { Agregar } from './assets/components/Agregar.jsx'
+import { Buscar } from './assets/components/Buscar.jsx'
+
 function App() {
   const [Position, setPosition] = useState('Agregar')
   const [productos, setproductos] = useState([])

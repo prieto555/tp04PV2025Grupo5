@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import React from 'react'
 import { Modificar } from "./Modificar";
+import { Buscar } from "./Buscar";
 export const Agregar = () => {
     const [productos, setProductos] = useState ([])
     const [formulario, setFormulario] = useState ({
@@ -56,15 +57,18 @@ export const Agregar = () => {
         )
         setProductos(nuevo_arreglo)
     }
+    useEffect(()=>{
+        console.log(productos)
+    },[productos])
     return(
         <>
         <h1>Gestion de Productos</h1>
         <form onSubmit={agregarProducto}>
             <input type="text" name="nombre" placeholder="Nombre" value={formulario.nombre} onChange={handleChange} required/>
             <input type="text" name="marca" placeholder="Marca" value={formulario.marca} onChange={handleChange} required/>
-            <input type="number" name="precioUnitario" placeholder="Precio Unitario" value={formulario.precioUnitario} onChange={handleChange} required/>
-            <input type="number" name="descuento" placeholder="Descuento (%)" value={formulario.descuento} onChange={handleChange} required/>
-            <input type="number" name="stock" placeholder="stock" value={formulario.stock} onChange={handleChange} required/>
+            <input min="0" type="number" name="precioUnitario" placeholder="Precio Unitario" value={formulario.precioUnitario} onChange={handleChange} required/>
+            <input min="0" type="number" name="descuento" placeholder="Descuento (%)" value={formulario.descuento} onChange={handleChange} required/>
+            <input min="0" type="number" name="stock" placeholder="stock" value={formulario.stock} onChange={handleChange} required/>
             <input type="text" name="estado" placeholder="Estado(True/False)" value={formulario.estado} onChange={handleChange} required/>
             <input type="text" name="descripcion" placeholder="Descripción" value={formulario.descripcion} onChange={handleChange} required/>
             <button type="submit">Agregar Producto</button>
@@ -96,6 +100,7 @@ export const Agregar = () => {
                 </li>
             ))}
         </ul>
+        <Buscar p={ productos }>Texto</Buscar>
         </>
     )
 }

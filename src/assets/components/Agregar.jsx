@@ -90,6 +90,7 @@ export const Agregar = () => {
             <ul>
                 {productos.filter(prod => prod.visible).map(prod => (
 
+
                     <li key={prod.id}>
                         <Eliminar id={prod.id} eliminarProducto={eliminarProducto} />
                         <button onClick={() => modificar(prod)}>Modificar</button>
@@ -107,6 +108,7 @@ export const Agregar = () => {
                                 Estado: {prod.estado} -
                                 Descripcion: {prod.descripcion}
                             </div>
+
                         )
                         }
                     </li>

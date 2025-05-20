@@ -93,7 +93,7 @@ const eliminarProducto = (id) => {
                     { prod.modificado===false ? (
                         <Modificar b={prod} funcion_modificar={agregar_modificado}></Modificar>
                     ) : (
-                        <div>
+                        <div className="form">
                             ID: {prod.id} -
                             Nombre = {prod.nombre} -
                             Marca = {prod.marca} -

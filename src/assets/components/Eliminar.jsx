@@ -1,5 +1,6 @@
-function Eliminar({ id, eliminarProducto }) {
+
+const Eliminar = ({ id, eliminarProducto }) => {
     return <button onClick={() => eliminarProducto(id)}>Eliminar</button>;
-}
+};
 
 export default Eliminar;

@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import React from 'react'
+import { useState, useEffect, useCallback } from "react";
 import { Modificar } from "./Modificar";
 import { Buscar } from "./Buscar";
 import Eliminar from "./Eliminar";
@@ -14,12 +13,17 @@ export const Agregar = () => {
         stock: '',
         nombre: '',
         marca: '',
-        estado: "",
+        estado: true,
         modificado:true,
     })
-    const eliminarProducto = (id) => {
-        setProductos(productos.filter(producto => producto.id !== id));
-    };
+  
+const eliminarProducto = (id) => {
+    setProductos(productos.map(prod =>
+        prod.id === id ? { ...prod, visible: false } : prod
+    ));
+};
+
+
     const handleChange = (e) => {
         const { name, value } = e.target
         setFormulario({ ...formulario, [name]: value})
@@ -36,8 +40,8 @@ export const Agregar = () => {
             stock: parseInt(formulario.stock),
             estado: formulario.estado,
             descripcion: formulario.descripcion,
-            precioConDescuento: parseFloat(formulario.precioUnitario)*(1-parseFloat(formulario.descuento)/100)
-            
+            precioConDescuento: parseFloat(formulario.precioUnitario)*(1-parseFloat(formulario.descuento)/100),
+            visible: true,
         }
         setProductos([...productos, nuevoProducto])
         setFormulario({
@@ -48,7 +52,7 @@ export const Agregar = () => {
             stock: '',
             nombre: '',
             marca: '',
-            estado: "",
+            estado: true,
             modificado:true,
         })
     }
@@ -74,13 +78,13 @@ export const Agregar = () => {
             <input min="0" type="number" name="precioUnitario" placeholder="Precio Unitario" value={formulario.precioUnitario} onChange={handleChange} required/>
             <input min="0" type="number" name="descuento" placeholder="Descuento (%)" value={formulario.descuento} onChange={handleChange} required/>
             <input min="0" type="number" name="stock" placeholder="stock" value={formulario.stock} onChange={handleChange} required/>
-            <input type="text" name="estado" placeholder="Estado(True/False)" value={formulario.estado} onChange={handleChange} required/>
             <input type="text" name="descripcion" placeholder="Descripción" value={formulario.descripcion} onChange={handleChange} required/>
             <button type="submit">Agregar Producto</button>
         </form>
         {productos.length>0&&<h2>Lista de Productos</h2>}
         <ul>
-            {productos.map ((prod) =>(
+            {productos.filter(prod => prod.visible).map(prod => (
+
                 <li key={prod.id}>
                     <Eliminar id={prod.id} eliminarProducto={eliminarProducto} />
                     <button onClick={() => {setProductos(productos.map(a =>

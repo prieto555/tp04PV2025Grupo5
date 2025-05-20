@@ -29,6 +29,7 @@ export const Modificar = ({b,funcion_modificar}) => {
     marca: marca === "" ? b.marca : marca,
     estado: estado === "" ? b.estado : estado,
     modificado:true,
+    visible: b.visible,
   }
   return (
     <>
